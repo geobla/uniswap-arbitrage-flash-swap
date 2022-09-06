@@ -5,6 +5,41 @@ Basically is usable on the **Binance Smart Chain** and provides callbacks for co
 
 **This is not a full project, build your or own infrastructure around it!**
 
+## Clone the repo and install Hardhat
+
+To setup our smart contract development stack we need to install Hardhat. When you can deploy a code, it doesn’t matter if you use Truffle or Hardhat, even online SDE such as Remix for smart contract development.
+
+Confirm your machine has git software already and clone the repo, running npm install bring all required package including Hardhat in your local repository. Hardhat is one of extensive solidity development tools and it is getting traction recently more than other tools.
+
+Hardhat can be installed by NPM and in this repo Hardhat is used through a local installation in your project. This way your environment will be reproducible, and you will avoid future version conflicts. Now you can check what files are in the repository.
+~~~
+$ git clone https://github.com/geobla/avaxArbBot.git 
+$ cd avaxArbBot
+$ npm install
+~~~
+
+* `abi` directory provides flash loan contract abi. Application Binary Interface (ABI) is the standard way to interact with contracts in the Ethereum ecosystem, both from outside the blockchain and for contract-to-contract interaction.
+* `contracts` directory contains a smart contract code `Flashswap.sol` and required interfaces for other protocol’s smart contract.
+`deployments` directory has a deployment script to deploy a smart contract in target network.
+* `src` directory contains all required helper Javascript codes that are called in `main.js` and `test.js` . `main.js` is Node.js script to monitor arbitrage opportunity and invoke a transaction for profits in BSC main network while `test.js` can run the same thing in BSC test network.
+* `hardhat.config.js` is a configuration file for Hardhat and we will set network endpoint and your private key of wallet addresses. Also you can set BscScan’s API key to verify your smart contract on BscScan and make your contract code visible for everyone.
+
+We are about to deploy a smart contract code but before doing this, we need to have BSC network endpoint we interact with and set up your wallet to extract a private key information. In the next section, I’ll cover how to create a project and endpoints in Chainstack service.
+
+## Create a project and endpoints in Chainstack
+
+Please note that Node.js script we develop requires WSS (WebSocket over SSL/TLS) therefore you need to pick up a service provider which supports WSS endpoint to integrate with. There seems like no workable WSS endpoints available from the official provided endpoints.
+
+I was using Moralis speedy nodes but the policy changed recently and stopped serving speedy nodes. I switched to Chainstack instead of Moralis. It suppors both https and wss endpoints, which is fabulous. 
+
+Copy both HTTPS endpoint and WSS endpoint information from the page and go to the repo. We will configure the parameters in the configuration file and deploy a smart contract by using Hardhat that you installed in the previous section.
+
+## Deploy a smart contract
+
+Rename `.env.template` file to `.env` and paste the copied endpoint information in the file. To deploy a smart contract in BSC mainnet, you have to fill out `MAINNET_ENDPOINT` and `MAINNET_KEY` at least. People can see only bytecodes of deployed smart contract on BscScan contract addres page.
+
+If you’d like to verify the smart contract code and make it visible to everyone in BscScan page, get an `API key` from BscScan and fill out the value in `.env` file `BSCSCAN_KEY` as well. If you haven’t created archive node and elastic or archive node in Testnet project, then please delete unnecessary configuration from the file.
+
 ## Links
 
  * https://github.com/yuyasugano/pancake-bakery-arbitrage 
