@@ -13,8 +13,8 @@ Confirm your machine has git software already and clone the repo, running npm in
 
 Hardhat can be installed by NPM and in this repo Hardhat is used through a local installation in your project. This way your environment will be reproducible, and you will avoid future version conflicts. Now you can check what files are in the repository.
 ~~~
-$ git clone https://github.com/geobla/avaxArbBot.git 
-$ cd avaxArbBot
+$ git clone https://github.com/geobla/uniswap-arbitrage-flash-swap.git 
+$ cd uniswap-arbitrage-flash-swap
 $ npm install
 ~~~
 
